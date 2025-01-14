@@ -3,7 +3,7 @@ FROM node:22.13.0-bullseye-slim
 # Following https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker
 
 RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 # Create app directory
 WORKDIR /usr/src/app
