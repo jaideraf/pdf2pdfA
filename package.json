@@ -1,15 +1,15 @@
 {
-  "name": "pdftopdfa",
+  "name": "pdf2pdfa",
   "version": "1.0.0",
-  "description": "JavaScript development environment model",
-  "main": "app.js",
+  "description": "A tool to convert PDF files to PDF-A files",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
-    "dev"
+    "pdf", "pdf-a", "pdf2pdfa"
   ],
   "type": "module",
   "author": "jaideraf <jaideraf@gmailcom>",
