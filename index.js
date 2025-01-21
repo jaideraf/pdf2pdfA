@@ -45,7 +45,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         args: [
           '--tesseract-timeout=0',
           '--skip-text',
-          '--skip-big',
+          '--skip-big=50',
           '--pdfa-image-compression=lossless',
           `--title="${title}"`,
           `--author="${author}"`,
