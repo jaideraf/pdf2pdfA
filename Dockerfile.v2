@@ -1,6 +1,11 @@
 # OS - Ubuntu Based
 FROM jbarlow83/ocrmypdf:v16.8.0
 
+# set timezone
+ENV TZ=America/Sao_Paulo
+RUN set -eux; \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # setup
 RUN apt update && apt install -y \
  	# tesseract language packages

@@ -8,3 +8,6 @@ A tool intended to replace http://pdfa.bu.ufsc.br/
 ```
 docker run --rm -p 8080:8080/tcp -v /home/jaider/Documentos/git-repositories/pdf2pdfA:/usr/src/app pdf2pdfa:latest
 ```
+# TO DO:
+
+Use https://www.npmjs.com/package/slugify to create the filename in the storage
