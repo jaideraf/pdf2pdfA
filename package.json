@@ -6,10 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon -e js,mjs,cjs,json,ejs index.js"
   },
   "keywords": [
-    "pdf", "pdf-a", "pdf2pdfa"
+    "pdf",
+    "pdf-a",
+    "pdf2pdfa"
   ],
   "type": "module",
   "author": "jaideraf <jaideraf@gmailcom>",
@@ -29,6 +31,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "multer": "^1.4.5-lts.1",
+    "ocrmypdf-js": "^1.1.1",
     "serve-favicon": "^2.5.0"
   }
 }

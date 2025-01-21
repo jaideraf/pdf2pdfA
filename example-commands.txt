@@ -8,4 +8,4 @@ ocrmypdf --tesseract-timeout=0 --skip-text --pdfa-image-compression=lossless fer
 --author "Autor de teste"
 
 
-ocrmypdf --tesseract-timeout=0 --skip-text --pdfa-image-compression=lossless --title "Teste de título" --author "Autor de teste" --subject "Assuntos" ferreira_ja_me_mar.pdf output.pdf
+ocrmypdf --tesseract-timeout=0 --skip-text --pdfa-image-compression=lossless --title "Teste de título" --author "Autor de teste" --subject "Assuntos" example-pdf.pdf example-pdfa.pdf

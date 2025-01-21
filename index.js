@@ -2,10 +2,13 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import multer from 'multer';
 import path from 'path';
+import { OcrMyPdf } from 'ocrmypdf-js';
+import { promises as fs } from 'fs';
 
 const app = express();
 
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
 app.use(favicon(path.join('public', 'cropped-favicon-32x32.png')));
 
 const storage = multer.diskStorage({
@@ -22,31 +25,51 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// const callOcrMyPdf = async (file) => {
-//   const { createWorker } = require('tesseract.js');
-//   const worker = createWorker();
-//   await worker.load();
-//   await worker.loadLanguage('eng');
-//   await worker.initialize('eng');
-//   const { data: { text } } = await worker.recognize(file);
-//   await worker.terminate();
-//   return text;
-// };
-
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  // res.send('File uploaded successfully');
-  console.log(req.body);
-  console.log(req.file);
-  // const text = callOcrMyPdf(req.file.path);
-  res.render('submited', { body: req.body, file: req.file });
+app.post('/upload', upload.single('file'), async (req, res) => {
+  const author = req.body.author || '';
+  const title = req.body.title || '';
+  const subject = req.body.subject || '';
+  const filePath = req.file.path;
+  const pdfa = `${req.file.originalname.replace('.pdf', '.pdfa')}.pdf`;
+
+  const generatePdfA = async () => {
+    const ocrmypdf = new OcrMyPdf();
+    try {
+      await ocrmypdf.execute({
+        inputPath: req.file.path,
+        outputPath: `processed/${pdfa}`,
+        args: [
+          '--tesseract-timeout=0',
+          '--skip-text',
+          '--pdfa-image-compression=lossless',
+          `--title="${title}"`,
+          `--author="${author}"`,
+          `--subject="${subject}"`,
+        ],
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  try {
+    await generatePdfA();
+    const data = await fs.readFile(`processed/${pdfa}`);
+    res.set('Content-Disposition', `attachment; filename="${pdfa}"`);
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.render('error');
+  }
 });
 
-app.get('/submited', (req, res) => {
-  res.render('submited');
+app.get('/upload', (req, res) => {
+  res.redirect('/');
 });
 
 app.listen(8080, () => {

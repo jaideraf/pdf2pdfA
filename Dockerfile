@@ -35,7 +35,10 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY --chown=node:node package*.json ./
-RUN npm ci --only=production && npm cache clean --force
+
+#RUN npm ci --only=production && npm cache clean --force
+
+RUN npm install
 
 # Bundle app source
 COPY --chown=node:node . .
@@ -44,5 +47,7 @@ VOLUME [ "/usr/src/app" ]
 
 EXPOSE 8080
 
-USER node
-CMD ["dumb-init", "node", "index.js" ]
+#USER node
+#CMD ["dumb-init", "node", "index.js" ]
+
+CMD ["npm", "run", "dev"]
