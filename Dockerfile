@@ -23,7 +23,14 @@ WORKDIR /opt/jbig2enc-0.30
 RUN ./autogen.sh && ./configure && make && make install
 
 RUN apt-get install -y --no-install-recommends \
+    img2pdf \
+    jbig2dec \
     ocrmypdf \
+    pngquant \
+    tesseract-ocr-eng \
+    tesseract-ocr-por \
+    tesseract-ocr-spa \
+    unpaper \
     && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
