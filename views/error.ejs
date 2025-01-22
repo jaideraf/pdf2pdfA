@@ -11,15 +11,24 @@
     Ocorreu um erro ao gerar o PDF/A.
   </h1>
   <p>
-    Verifique se o arquivo PDF submetido está correto. Caso o erro persista, entre em contato com o administrador do sistema. A página será recarregada automaticamente em 7 segundos.
+    Verifique se o arquivo PDF submetido está correto.
   </p>
+  <p>
+    <ul>
+      <li>Somente pode ser submetido um arquivo PDF;</li>
+      <li>O arquivo não pode ser maior que 20 megabytes;</li>
+      <li>O arquivo não pode estar assinado;</li>
+    </ul>
+  </p>
+  <p>Caso o erro persista, entre em contato com o administrador do sistema.</p>
+  <p>A página será recarregada automaticamente em 10 segundos.</p>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
   setTimeout(function () {
-     // after 3 seconds
+     // after 10 seconds
      window.location = "/";
-  }, 7000);
+  }, 10000);
 </script>
 </html>
