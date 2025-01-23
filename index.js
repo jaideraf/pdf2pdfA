@@ -1,8 +1,8 @@
 import express from 'express';
 import favicon from 'serve-favicon';
 import multer from 'multer';
-import { OcrMyPdf } from 'ocrmypdf-js';
-import { promises as fs } from 'fs';
+// import { OcrMyPdf } from 'ocrmypdf-js';
+// import { promises as fs } from 'fs';
 import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
 
 const app = express();
@@ -24,20 +24,22 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   const genPdfA = new ConvertPdfToPdfA(req.file, req.body);
 
   try {
+    genPdfA.validateFileSize();
     genPdfA.validateFileTypeFromFilename();
     genPdfA.validateFileTypeFromContent();
-    genPdfA.validateFileSize();
+    if (genPdfA.mimetype !== 'application/pdf') {
+      throw new Error('Invalid file type (file content is not a pdf)');
+    }
+
+    console.log('cheguei aqui');
+    // genPdfA.slugfyFilename();
+    // console.log(genPdfA.filename);
+    // genPdfA.log();
+    res.redirect('/');
   } catch (error) {
     console.log(error);
     res.redirect('/error');
-    return;
   }
-
-  console.log('cheguei aqui');
-  // genPdfA.slugfyFilename();
-  // console.log(genPdfA.filename);
-  // genPdfA.log();
-  res.render('home');
 
   // console.log(
   //   originalname,

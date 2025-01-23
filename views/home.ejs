@@ -19,7 +19,7 @@
       action="/upload"
       enctype="multipart/form-data"
       class="form-group"
-      onsubmit="submitLoading()"
+      id="form"
     >
       <div class="input-group">
         <label for="author" class="input-group-text">Autor</label>
@@ -29,6 +29,7 @@
           name="author"
           id="author"
           class="form-control"
+          value="Autor de teste"
         />
       </div>
       <div class="input-group">
@@ -39,6 +40,7 @@
           name="title"
           id="title"
           class="form-control"
+          value="Título de teste"
         />
       </div>
       <div class="input-group">
@@ -49,6 +51,7 @@
           name="subject"
           id="subject"
           class="form-control"
+          value="Assunto de teste"
         />
       </div>
       <div class="input-group">
@@ -61,16 +64,16 @@
           required
         />
       </div>
+      <button
+        type="submit"
+        value="Enviar"
+        class="btn btn-primary"
+        title="Converter arquivo"
+        id="submit"
+      >
+        Enviar
+      </button>
     </form>
-    <button
-      type="submit"
-      value="Enviar"
-      class="btn btn-primary"
-      title="Converter arquivo"
-      id="submit"
-    >
-      Enviar
-    </button>
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

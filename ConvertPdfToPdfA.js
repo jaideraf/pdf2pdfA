@@ -13,6 +13,12 @@ export default class ConvertPdfToPdfA {
     this.path = reqFile.path;
   }
 
+  validateFileSize() {
+    if (this.size > 20971520) {
+      throw new Error('File size is bigger than 20MB');
+    }
+  }
+
   validateFileTypeFromFilename() {
     if (this.mimetype !== 'application/pdf') {
       throw new Error('Invalid file type (file name is not a pdf)');
@@ -23,13 +29,8 @@ export default class ConvertPdfToPdfA {
     const type = await fileTypeFromFile(this.path);
     console.log(type);
     if (type.mime !== 'application/pdf') {
-      throw new Error('Invalid file type (file content is not a pdf)');
-    }
-  }
-
-  validateFileSize() {
-    if (this.size > 20971520) {
-      throw new Error('File size is bigger than 20MB');
+      this.mimetype = type.mime;
+      // throw new Error('Invalid file type (file content is not a pdf)');
     }
   }
 
