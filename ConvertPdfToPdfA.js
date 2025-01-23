@@ -1,5 +1,6 @@
 import slugify from 'slugify';
 import { fileTypeFromFile } from 'file-type';
+import { exec } from 'child_process';
 
 export default class ConvertPdfToPdfA {
   constructor(reqFile, reqBody) {
@@ -25,22 +26,23 @@ export default class ConvertPdfToPdfA {
     }
   }
 
-  async validateFileTypeFromContent() {
-    const type = await fileTypeFromFile(this.path);
-    console.log(type);
-    if (type.mime !== 'application/pdf') {
-      this.mimetype = type.mime;
-      // throw new Error('Invalid file type (file content is not a pdf)');
-    }
-  }
+  // TODO: Implement this method
+  // async validateFileTypeFromFileContent() {
+  //   const type = await fileTypeFromFile(this.path);
+  //   console.log(type);
+  //   if (type.mime !== 'application/pdf') {
+  //     this.mimetype = type.mime;
+  //     // throw new Error('Invalid file type (file content is not a pdf)');
+  //   }
+  // }
 
   slugfyFilename() {
-    const slug = slugify(this.originalname, {
+    const slug = slugify(this.originalname.replace('.pdf', ''), {
       lower: true,
       strict: true,
       locale: 'pt',
     });
-    this.filename = `${slug}.pdf`;
+    this.filename = slug;
   }
 
   log() {
@@ -53,4 +55,15 @@ export default class ConvertPdfToPdfA {
       this.path,
     );
   }
+
+  // async execute() {
+  //   try {
+  //     await exec(
+  //       `ocrmypdf ${this.path} processed/${this.filename}.pdfa.pdf --tesseract-timeout=0 --skip-text --skip-big=50 --pdfa-image-compression=lossless --title="${this.title}" --author="${this.author}" --subject="${this.subject}"`,
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // }
 }

@@ -26,15 +26,13 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     genPdfA.validateFileSize();
     genPdfA.validateFileTypeFromFilename();
-    genPdfA.validateFileTypeFromContent();
-    if (genPdfA.mimetype !== 'application/pdf') {
-      throw new Error('Invalid file type (file content is not a pdf)');
-    }
+    // genPdfA.validateFileTypeFromFileContent(); TODO: Implement this method
 
     console.log('cheguei aqui');
-    // genPdfA.slugfyFilename();
-    // console.log(genPdfA.filename);
-    // genPdfA.log();
+    genPdfA.slugfyFilename();
+    console.log(genPdfA.filename);
+    genPdfA.log();
+    genPdfA.execute();
     res.redirect('/');
   } catch (error) {
     console.log(error);
