@@ -14,7 +14,10 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({
+  dest: 'uploads/',
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB file size limit
+});
 
 app.post('/upload', upload.single('file'), async (req, res) => {
   const genPdfA = new ConvertPdfToPdfA(req.file, req.body);
@@ -52,5 +55,5 @@ app.get('/error', (req, res) => {
 });
 
 app.listen(8080, () => {
-  console.log('Server is running on port http://localhost:8080');
+  console.log('Server is running on http://localhost:8080');
 });
