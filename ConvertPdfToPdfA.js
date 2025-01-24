@@ -1,6 +1,9 @@
 import slugify from 'slugify';
-import { fileTypeFromFile } from 'file-type';
-import { exec } from 'child_process';
+// import { fileTypeFromFile } from 'file-type';
+import { promisify } from 'node:util';
+import childProcess from 'node:child_process';
+
+const exec = promisify(childProcess.exec);
 
 export default class ConvertPdfToPdfA {
   constructor(reqFile, reqBody) {
@@ -45,16 +48,16 @@ export default class ConvertPdfToPdfA {
     this.filename = slug;
   }
 
-  log() {
-    console.log(this.author, this.title, this.subject);
-    console.log(
-      this.originalname,
-      this.filename,
-      this.mimetype,
-      this.size,
-      this.path,
-    );
-  }
+  // log() {
+  //   console.log(this.author, this.title, this.subject);
+  //   console.log(
+  //     this.originalname,
+  //     this.filename,
+  //     this.mimetype,
+  //     this.size,
+  //     this.path,
+  //   );
+  // }
 
   // async execute() {
   //   try {
@@ -62,8 +65,16 @@ export default class ConvertPdfToPdfA {
   //       `ocrmypdf ${this.path} processed/${this.filename}.pdfa.pdf --tesseract-timeout=0 --skip-text --skip-big=50 --pdfa-image-compression=lossless --title="${this.title}" --author="${this.author}" --subject="${this.subject}"`,
   //     );
   //   } catch (error) {
-  //     console.log(error);
+  //     console.error(error);
   //     throw error;
   //   }
   // }
+
+  async ocrmypdf() {
+    const { stdout, stderr } = await exec(
+      `ocrmypdf ${this.path} processed/${this.filename}.pdfa.pdf --tesseract-timeout=0 --skip-text --skip-big=50 --pdfa-image-compression=lossless --title="${this.title}" --author="${this.author}" --subject="${this.subject}"`,
+    );
+    console.log('stdout:', stdout);
+    console.error('stderr:', stderr);
+  }
 }

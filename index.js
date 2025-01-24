@@ -1,8 +1,7 @@
 import express from 'express';
 import favicon from 'serve-favicon';
 import multer from 'multer';
-// import { OcrMyPdf } from 'ocrmypdf-js';
-// import { promises as fs } from 'fs';
+import { promises as fs } from 'fs';
 import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
 
 const app = express();
@@ -18,69 +17,30 @@ app.get('/', (req, res) => {
 const upload = multer({ dest: 'uploads/' });
 
 app.post('/upload', upload.single('file'), async (req, res) => {
-  // const { author, title, subject } = req.body;
-  // const { originalname, filename, mimetype, size, path: filepath } = req.file;
-
   const genPdfA = new ConvertPdfToPdfA(req.file, req.body);
 
   try {
     genPdfA.validateFileSize();
     genPdfA.validateFileTypeFromFilename();
     // genPdfA.validateFileTypeFromFileContent(); TODO: Implement this method
-
-    console.log('cheguei aqui');
     genPdfA.slugfyFilename();
-    console.log(genPdfA.filename);
-    genPdfA.log();
-    genPdfA.execute();
-    res.redirect('/');
+
+    try {
+      await genPdfA.ocrmypdf();
+      const data = await fs.readFile(`processed/${genPdfA.filename}.pdfa.pdf`);
+      res.set(
+        'Content-Disposition',
+        `attachment; filename="${genPdfA.filename}.pdfa.pdf"`,
+      );
+      res.send(data);
+    } catch (error) {
+      console.error(error);
+      res.redirect('error');
+    }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.redirect('/error');
   }
-
-  // console.log(
-  //   originalname,
-  //   filename,
-  //   mimetype,
-  //   size,
-  //   filepath,
-  //   author,
-  //   title,
-  //   subject,
-  // );
-
-  // const generatePdfA = async () => {
-  //   const ocrmypdf = new OcrMyPdf();
-  //   try {
-  //     await ocrmypdf.execute({
-  //       inputPath: req.file.path,
-  //       outputPath: `processed/${pdfa}`,
-  //       args: [
-  //         '--tesseract-timeout=0',
-  //         '--skip-text',
-  //         '--skip-big=50',
-  //         '--pdfa-image-compression=lossless',
-  //         `--title="${title}"`,
-  //         `--author="${author}"`,
-  //         `--subject="${subject}"`,
-  //       ],
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // };
-
-  // try {
-  //   await generatePdfA();
-  //   const data = await fs.readFile(`processed/${pdfa}`);
-  //   res.set('Content-Disposition', `attachment; filename="${pdfa}"`);
-  //   res.send(data);
-  // } catch (err) {
-  //   console.log(err);
-  //   res.render('error');
-  // }
 });
 
 app.get('/upload', (req, res) => {
