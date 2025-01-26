@@ -1,37 +1,32 @@
-FROM node:22.13.0-bookworm-slim
+# OS - Ubuntu Based
+FROM jbarlow83/ocrmypdf:v16.8.0
 
-# Following https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker
+# set timezone
+ENV TZ=America/Sao_Paulo
+RUN set -eux; \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# install dependencies
+# setup
+RUN apt update && apt install -y \
+ 	# tesseract language packages
+	tesseract-ocr-por \
+	poppler-utils \
+	curl && \
+	# clean
+	apt clean && \
+	apt autoremove -y
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    automake \
-    autotools-dev \
-    build-essential \
-    ca-certificates \
-    dumb-init \
-    libleptonica-dev \
-    libtool \
-    wget \
-    zlib1g-dev
+# node LTS
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
+	apt purge nodejs -y && \
+	apt install -y nodejs && \
+	echo "Node Version:" && node -v && \
+	# clean
+	apt clean && \
+	apt autoremove -y
 
-WORKDIR /opt
-RUN wget https://github.com/agl/jbig2enc/archive/refs/tags/0.30.tar.gz
-RUN tar xzf 0.30.tar.gz
-
-WORKDIR /opt/jbig2enc-0.30
-RUN ./autogen.sh && ./configure && make && make install
-
-RUN apt-get install -y --no-install-recommends \
-    img2pdf \
-    jbig2dec \
-    ocrmypdf \
-    pngquant \
-    tesseract-ocr-eng \
-    tesseract-ocr-por \
-    tesseract-ocr-spa \
-    unpaper \
-    && rm -rf /var/lib/apt/lists/*
+# override entrypoint
+ENTRYPOINT ["/usr/bin/env"]
 
 ENV NODE_ENV=production
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conversão de PDF para PDF-A</title>
+    <title>Conversão de PDF para PDF/A</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -11,79 +11,92 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-    <h1>Conversão de PDF para PDF-A</h1>
+  <body class="bg-light">
+    <div class="container pt-4">
+      <h3>Conversão de PDF para PDF/A</h3>
 
-    <form
-      method="post"
-      action="/upload"
-      enctype="multipart/form-data"
-      class="form-group"
-      id="form"
-    >
-      <div class="input-group">
-        <label for="author" class="input-group-text">Autor</label>
-        <input
-          type="text"
-          placeholder="Nome completo (opcional, porém, recomendado)"
-          name="author"
-          id="author"
-          class="form-control"
-          value="Autor de teste"
-        />
-      </div>
-      <div class="input-group">
-        <label for="title" class="input-group-text">Título</label>
-        <input
-          type="text"
-          placeholder="Maiúsculas conforme a língua portuguesa (opcional, porém, recomendado)"
-          name="title"
-          id="title"
-          class="form-control"
-          value="Título de teste"
-        />
-      </div>
-      <div class="input-group">
-        <label for="subject" class="input-group-text">Assuntos</label>
-        <input
-          type="text"
-          placeholder="Separe os assuntos com vírgulas (opcional, porém, recomendado)"
-          name="subject"
-          id="subject"
-          class="form-control"
-          value="Assunto de teste"
-        />
-      </div>
-      <div class="input-group">
-        <input
-          type="file"
-          name="file"
-          accept="application/pdf"
-          id="file"
-          class="form-control"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        value="Enviar"
-        class="btn btn-primary"
-        title="Converter arquivo"
-        id="submit"
+      <form
+        method="post"
+        action="/upload"
+        enctype="multipart/form-data"
+        class="form-group"
+        id="form"
       >
-        Enviar
-      </button>
-      <button
-        type="button"
-        value="Recarregar a página"
-        class="btn btn-secondary"
-        style="display: none"
-        title="Recarregar a página"
-        id="reload"
-      >
-        Recarregar a página
-      </button>
-    </form>
+        <p>
+          O preenchimento dos campos é opcional, porém recomendado para uma
+          maior qualidade visual e técnica.
+        </p>
+        <div class="input-group">
+          <label for="author" class="input-group-text">Autor</label>
+          <input
+            type="text"
+            placeholder="Nome completo"
+            name="author"
+            id="author"
+            class="form-control"
+            value=""
+          />
+        </div>
+        <div class="input-group">
+          <label for="title" class="input-group-text">Título</label>
+          <input
+            type="text"
+            placeholder="Use maiúsculas conforme a língua portuguesa"
+            name="title"
+            id="title"
+            class="form-control"
+            value=""
+          />
+        </div>
+        <div class="input-group">
+          <label for="keywords" class="input-group-text">Palavras-chave</label>
+          <input
+            type="text"
+            placeholder="Separe as palavras-chave com vírgulas"
+            name="keywords"
+            id="keywords"
+            class="form-control"
+            value=""
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="file"
+            name="file"
+            accept="application/pdf"
+            id="file"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="ocr" id="ocr" />
+          <label class="form-check-label" for="">
+            Usar OCR para identificar texto nas imagens (opcional)
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          value="Enviar"
+          class="btn btn-primary"
+          title="Converter arquivo"
+          id="submit"
+        >
+          Enviar
+        </button>
+        <button
+          type="button"
+          value="Recarregar a página"
+          class="btn btn-secondary"
+          style="display: none"
+          title="Recarregar a página"
+          id="reload"
+        >
+          Recarregar a página
+        </button>
+      </form>
+    </div>
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

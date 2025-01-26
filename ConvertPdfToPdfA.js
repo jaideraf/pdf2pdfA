@@ -9,7 +9,8 @@ export default class ConvertPdfToPdfA {
   constructor(reqFile, reqBody) {
     this.author = reqBody.author;
     this.title = reqBody.title;
-    this.subject = reqBody.subject;
+    this.keywords = reqBody.keywords;
+    this.ocr = reqBody.ocr ? 300 : 0;
     this.originalname = reqFile.originalname;
     this.filename = reqFile.filename;
     this.mimetype = reqFile.mimetype;
@@ -18,8 +19,8 @@ export default class ConvertPdfToPdfA {
   }
 
   validateFileSize() {
-    if (this.size > 20971520) {
-      throw new Error('File size is bigger than 20MB');
+    if (this.size > 33554432) {
+      throw new Error('File size is bigger than 32MB');
     }
   }
 
@@ -71,8 +72,35 @@ export default class ConvertPdfToPdfA {
   // }
 
   async ocrmypdf() {
+    console.log(
+      `ocrmypdf \
+      ${this.ocr ? '--redo-ocr' : '--skip-text'} \
+      --tesseract-timeout=${this.ocr} \
+      --skip-big=50 \
+      --pdfa-image-compression=lossless \
+      --language=por+eng+spa \
+      ${this.title ? `--title="${this.title}"` : ''} \
+      ${this.author ? `--author="${this.author}"` : ''} \
+      ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
+      ${this.keywords ? `--subject="${this.keywords}"` : ''} \
+      ${this.path} \
+      processed/${this.filename}.pdfa.pdf`,
+    );
     const { stdout, stderr } = await exec(
-      `ocrmypdf ${this.path} processed/${this.filename}.pdfa.pdf --tesseract-timeout=0 --skip-text --skip-big=50 --pdfa-image-compression=lossless --title="${this.title}" --author="${this.author}" --subject="${this.subject}"`,
+      // tesseract-timeout=300 means 5 minutes
+      `ocrmypdf \
+      ${this.ocr ? '--redo-ocr' : '--skip-text'} \
+      --tesseract-timeout=${this.ocr} \
+      --skip-big=50 \
+      --pdfa-image-compression=lossless \
+      --language=por+eng+spa \
+      --quiet \
+      ${this.title ? `--title="${this.title}"` : ''} \
+      ${this.author ? `--author="${this.author}"` : ''} \
+      ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
+      ${this.keywords ? `--subject="${this.keywords}"` : ''} \
+      ${this.path} \
+      processed/${this.filename}.pdfa.pdf`,
     );
     console.log('stdout:', stdout);
     console.error('stderr:', stderr);

@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 const upload = multer({
   dest: 'uploads/',
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB file size limit
+  // limits: { fileSize: 32 * 1024 * 1024 }, // 30 MB file size limit
 });
 
 app.post('/upload', upload.single('file'), async (req, res) => {

@@ -6,13 +6,15 @@ reloadBtn.addEventListener('click', () => window.location.reload());
 
 // When the user submits the form, validate if the file is a pdf
 
-function validateFileTypeFromBrowser(event) {
+function validateFileFromBrowser(event) {
   const file = fileInput.files[0];
   if (file.type !== 'application/pdf') {
     alert(
-      `Somente um arquivo no formato PDF é permitido. \
-      Certifique-se de que o arquivo selecionado é um PDF.`,
+      `Somente um arquivo no formato PDF é permitido. Certifique-se de que o arquivo selecionado é um PDF.`,
     );
+    event.preventDefault();
+  } else if (file.size > 33554432) {
+    alert(`O arquivo selecionado ultrapassa o tamanho permitido de 32 MB.`);
     event.preventDefault();
   } else {
     // If the file is a pdf, show the loading status
@@ -26,4 +28,4 @@ function validateFileTypeFromBrowser(event) {
   }
 }
 
-formElem.addEventListener('submit', validateFileTypeFromBrowser);
+formElem.addEventListener('submit', validateFileFromBrowser);
