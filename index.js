@@ -3,6 +3,7 @@ import favicon from 'serve-favicon';
 import multer from 'multer';
 import { promises as fs } from 'fs';
 import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
+import e from 'express';
 
 const app = express();
 
@@ -52,6 +53,17 @@ app.get('/upload', (req, res) => {
 
 app.get('/error', (req, res) => {
   res.render('error');
+});
+
+app.use((req, res, next) => {
+  const err = new Error('404: Page Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  if (err.status !== 404) console.log(err.stack);
+  res.status(err.status || 500).json({ error: err.message });
 });
 
 app.listen(8080, () => {
