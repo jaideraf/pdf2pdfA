@@ -72,20 +72,6 @@ export default class ConvertPdfToPdfA {
   // }
 
   async ocrmypdf() {
-    console.log(
-      `ocrmypdf \
-      ${this.ocr ? '--redo-ocr' : '--skip-text'} \
-      --tesseract-timeout=${this.ocr} \
-      --skip-big=50 \
-      --pdfa-image-compression=lossless \
-      --language=por+eng+spa \
-      ${this.title ? `--title="${this.title}"` : ''} \
-      ${this.author ? `--author="${this.author}"` : ''} \
-      ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
-      ${this.keywords ? `--subject="${this.keywords}"` : ''} \
-      ${this.path} \
-      processed/${this.filename}.pdfa.pdf`,
-    );
     const { stdout, stderr } = await exec(
       // tesseract-timeout=300 means 5 minutes
       `ocrmypdf \
@@ -100,7 +86,7 @@ export default class ConvertPdfToPdfA {
       ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
       ${this.keywords ? `--subject="${this.keywords}"` : ''} \
       ${this.path} \
-      processed/${this.filename}.pdfa.pdf`,
+      pdfa/${this.filename}.pdfa.pdf`,
     );
     console.log('stdout:', stdout);
     console.error('stderr:', stderr);
