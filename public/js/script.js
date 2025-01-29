@@ -20,7 +20,7 @@ function validateFileFromBrowser(event) {
     // If the file is a pdf, show the loading status
     submitBtn.setAttribute('disabled', 'true');
     submitBtn.innerHTML = `
-      <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Aguarde...
+      <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Aguarde, a conversão pode demorar alguns minutos...
     `;
 
     // And show the reload button

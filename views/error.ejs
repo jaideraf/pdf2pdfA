@@ -1,23 +1,27 @@
 <%- include('partials/header.ejs') %>
+<header>
+  <div class="py-2 pt-4 text-center">
+    <h3>Ocorreu um erro ao gerar o arquivo PDF/A.</h3>
+  </div>
+</header>
   <div class="container pt-4">
-    <h3>Ocorreu um erro ao gerar o PDF/A.</h3>
-  <p>
-    Verifique se o arquivo PDF submetido está correto.
-  </p>
-  <p>
-    <ul>
-      <li>Somente pode ser submetido um arquivo PDF;</li>
-      <li>O arquivo não pode ser maior que 32 megabytes;</li>
-      <li>O arquivo não pode estar assinado;</li>
-    </ul>
-  </p>
-  <p>Caso o erro persista, entre em contato com o administrador do sistema.</p>
-  <p>A página será recarregada automaticamente em 10 segundos.</p>
+    <p>
+      Verifique se o arquivo PDF submetido está correto.
+    </p>
+    <p>
+      <ul>
+        <li>O arquivo não pode estar assinado: um arquivo assinado digitalmente não pode ser alterado;</li>
+        <li>O arquivo não pode ser maior que 32 megabytes: caso seu arquivo ultrapasse esse limite, converta-o para PDF/A em seu programa de origem (Microsoft Word, LibreOffice Writer, etc.)</li>
+        <li>Somente pode ser submetido um arquivo do tipo PDF;</li>
+      </ul>
+    </p>
+    <p>Caso o erro persista, entre em contato com o <a href="mailto:jaider.ferreira@ufsc.br?subject=Conversor%20de%20PDF%20para%20PDF/A" title="Enviar e-mail">administrador do sistema</a>.</p>
+    <p>Você será direcionado para a página inicial automaticamente em 30 segundos (ou clicando <a href="/" title="Ir para a página inicial">aqui</a>).</p>
   </div>
 <script>
   setTimeout(function () {
-     // after 10 seconds
+     // after 30 seconds
      window.location = "/";
-  }, 10000);
+  }, 30000);
 </script>
 <%- include('partials/footer.ejs') %>

@@ -1,6 +1,11 @@
 <%- include('partials/header.ejs') %>
-  <div class="container pt-4">
+<header>
+  <div class="py-2 pt-4 text-center">
     <h3>Conversão de PDF para PDF/A</h3>
+  </div>
+</header>
+<main>
+  <div class="container pt-4">
     <form
       method="post"
       action="/upload"
@@ -8,21 +13,16 @@
       class="form-group"
       id="form"
     >
-      <p>
-        O preenchimento dos campos é opcional, porém recomendado para uma maior
-        qualidade visual e técnica.
-      </p>
-      <div class="input-group">
-        <label for="author" class="input-group-text">Autor</label>
-        <input
-          type="text"
-          placeholder="Nome completo"
-          name="author"
-          id="author"
-          class="form-control"
-          value=""
-        />
+    <div class="card">
+      <div class="card-header">
+        <div class="text-center">
+          <p style="margin-bottom: 0;">
+            O preenchimento dos campos é opcional, porém <strong>recomendado</strong> para uma maior
+            qualidade técnica e visual.
+          </p>
+        </div>
       </div>
+    <div class="card-body">
       <div class="input-group">
         <label for="title" class="input-group-text">Título</label>
         <input
@@ -34,53 +34,74 @@
           value=""
         />
       </div>
-      <div class="input-group">
-        <label for="keywords" class="input-group-text">Palavras-chave</label>
-        <input
-          type="text"
-          placeholder="Separe as palavras-chave com vírgulas"
-          name="keywords"
-          id="keywords"
-          class="form-control"
-          value=""
-        />
-      </div>
-      <div class="input-group">
-        <input
-          type="file"
-          name="file"
-          accept="application/pdf"
-          id="file"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="ocr" id="ocr" />
-        <label class="form-check-label" for="">
-          Usar OCR para identificar texto nas imagens (opcional)
-        </label>
-      </div>
-      <button
-        type="submit"
-        value="Enviar"
-        class="btn btn-primary"
-        title="Converter arquivo"
-        id="submit"
-      >
-        Enviar
-      </button>
-      <button
-        type="button"
-        value="Recarregar a página"
-        class="btn btn-secondary"
-        style="display: none"
-        title="Recarregar a página"
-        id="reload"
-      >
-        Recarregar a página
-      </button>
+        <div class="input-group">
+          <label for="author" class="input-group-text">Autor</label>
+          <input
+            type="text"
+            placeholder="Nome completo"
+            name="author"
+            id="author"
+            class="form-control"
+            value=""
+          />
+        </div>
+        <div class="input-group">
+          <label for="keywords" class="input-group-text">Palavras-chave</label>
+          <input
+            type="text"
+            placeholder="Separe as palavras-chave com vírgulas"
+            name="keywords"
+            id="keywords"
+            class="form-control"
+            value=""
+          />
+        </div>
+        <div class="input-group">
+          <label for="file" class="input-group-text">Arquivo PDF</label>
+          <input
+            type="file"
+            name="file"
+            accept="application/pdf"
+            id="file"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="ocr" id="ocr" />
+            <label class="form-check-label" for="ocr">
+              Usar <abbr title="Optical Character Recognition" class="initialism">OCR</abbr> para identificar texto nas imagens
+            </label>
+          </div>
+        </div>
+        <div class="input-group d-flex justify-content-center">
+          <span>
+            <button
+            type="submit"
+            value="Enviar"
+            class="btn btn-primary"
+            title="Converter arquivo"
+            id="submit">
+            Enviar
+            </button>
+            <button
+            type="button"
+            value="Recarregar a página"
+            class="btn btn-secondary"
+            style="display: none"
+            title="Recarregar a página"
+            id="reload"
+            >
+            Recarregar a página
+            </button>
+          </span>
+        </div>
+    </div>
+    </div>
     </form>
   </div>
 </body>
+
+</main>
 <%- include('partials/footer.ejs') %>
