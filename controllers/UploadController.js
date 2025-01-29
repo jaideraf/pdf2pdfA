@@ -14,11 +14,12 @@ const UploadController = {
       try {
         await genPdfA.ocrmypdf();
         const data = await fs.readFile(`pdfa/${genPdfA.filename}.pdfa.pdf`);
-        res.set(
-          'Content-Disposition',
-          `attachment; filename="${genPdfA.filename}.pdfa.pdf"`,
-        );
-        res.send(data);
+        // res.set(
+        //   'Content-Disposition',
+        //   `attachment; filename="${genPdfA.filename}.pdfa.pdf"`,
+        // );
+        // res.send(data);
+        res.render('download', { pdfa: data });
       } catch (error) {
         console.error(error);
         res.redirect('/error');

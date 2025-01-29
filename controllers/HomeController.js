@@ -1,6 +1,6 @@
 const HomeController = {
   index(req, res) {
-    res.render('home', { title: 'Home' });
+    res.render('home', { title: 'Página inicial' });
   },
 };
 
