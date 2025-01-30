@@ -2,6 +2,7 @@ import slugify from 'slugify';
 // import { fileTypeFromFile } from 'file-type';
 import { promisify } from 'node:util';
 import childProcess from 'node:child_process';
+import log from '../utils/logger.js';
 
 const exec = promisify(childProcess.exec);
 
@@ -86,9 +87,9 @@ export default class ConvertPdfToPdfA {
       ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
       ${this.keywords ? `--subject="${this.keywords}"` : ''} \
       ${this.path} \
-      pdfa/${this.filename}.pdfa.pdf`,
+      public/pdfa/${this.filename}.pdfa.pdf`,
     );
-    console.log('stdout:', stdout);
-    console.error('stderr:', stderr);
+    log('stdout:', stdout);
+    log('stderr:', stderr);
   }
 }

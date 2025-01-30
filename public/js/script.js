@@ -2,7 +2,9 @@ const formElem = document.getElementById('form');
 const fileInput = document.getElementById('file');
 const submitBtn = document.getElementById('submit');
 const reloadBtn = document.getElementById('reload');
-reloadBtn.addEventListener('click', () => window.location.reload());
+if (reloadBtn) {
+  reloadBtn.addEventListener('click', () => window.location.reload());
+}
 
 // When the user submits the form, validate if the file is a pdf
 
@@ -28,4 +30,6 @@ function validateFileFromBrowser(event) {
   }
 }
 
-formElem.addEventListener('submit', validateFileFromBrowser);
+if (formElem) {
+  formElem.addEventListener('submit', validateFileFromBrowser);
+}

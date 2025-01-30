@@ -1,7 +1,8 @@
 <%- include('partials/header.ejs', {title: "Arquivo PDF/A gerado com sucesso"}) %>
-  <div class="container pt-4">
-    <p>
-      Verifique se o arquivo PDF submetido está correto.
-    </p>
+  <div class="container pt-4 text-center">
+    <!-- <p>
+      Faça o download do arquivo PDF/A:
+    </p> -->
+    <a href="<%= typeof pdfaFilePath != 'undefined' ? pdfaFilePath : '' %>" class="btn btn-primary" download=""<%= typeof pdfaFilename != 'undefined' ? pdfaFilename : '' %>"">Download do arquivo PDF/A</a>
   </div>
 <%- include('partials/footer.ejs') %>

@@ -1,4 +1,5 @@
-import { promises as fs } from 'fs';
+// import { promises as fs } from 'fs';
+import log from '../utils/logger.js';
 import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
 
 const UploadController = {
@@ -13,19 +14,17 @@ const UploadController = {
 
       try {
         await genPdfA.ocrmypdf();
-        const data = await fs.readFile(`pdfa/${genPdfA.filename}.pdfa.pdf`);
-        // res.set(
-        //   'Content-Disposition',
-        //   `attachment; filename="${genPdfA.filename}.pdfa.pdf"`,
-        // );
-        // res.send(data);
-        res.render('download', { pdfa: data });
+        // await fs.readFile(`public/pdfa/${genPdfA.filename}.pdfa.pdf`);
+        res.render('download', {
+          pdfaFilePath: `pdfa/${genPdfA.filename}.pdfa.pdf`,
+          pdfaFilename: `${genPdfA.filename}.pdfa.pdf`,
+        });
       } catch (error) {
-        console.error(error);
+        log(error);
         res.redirect('/error');
       }
     } catch (error) {
-      console.error(error);
+      log(error);
       res.redirect('/error');
     }
   },
