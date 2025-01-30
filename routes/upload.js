@@ -4,9 +4,10 @@ import UploadController from '../controllers/UploadController.js';
 
 const uploadRoutes = new Router();
 
+// Multer configuration, limits file size to 32 MB
 const upload = multer({
   dest: 'uploads/',
-  // limits: { fileSize: 32 * 1024 * 1024 }, // 30 MB file size limit
+  limits: { fileSize: 32 * 1024 * 1024 },
 });
 
 uploadRoutes.post('/', upload.single('file'), UploadController.index);
