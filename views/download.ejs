@@ -3,6 +3,9 @@
     <!-- <p>
       Faça o download do arquivo PDF/A:
     </p> -->
-    <a href="<%= typeof pdfaFilePath != 'undefined' ? pdfaFilePath : '' %>" class="btn btn-primary" download=""<%= typeof pdfaFilename != 'undefined' ? pdfaFilename : '' %>"">Download do arquivo PDF/A</a>
+    <a href="<%= typeof pdfaFilePath != 'undefined' ? pdfaFilePath : '' %>" class="btn btn-primary" download="<%= typeof pdfaFilename != 'undefined' ? pdfaFilename : '' %>" title="Faz o download do arquivo PDF/A">Download do arquivo PDF/A<i class="fas fa-file-download" aria-hidden="true"></i></a>
+
+
+    <a href="/" class="btn btn-secondary" title="Retorna à página inicial">Retornar à pagina inicial<i class="fas fa-home" aria-hidden="true"></i></a>
   </div>
 <%- include('partials/footer.ejs') %>

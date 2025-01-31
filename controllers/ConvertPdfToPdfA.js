@@ -1,5 +1,4 @@
-import slugify from 'slugify';
-// import { fileTypeFromFile } from 'file-type';
+import { fileTypeFromFile } from 'file-type';
 import { promisify } from 'node:util';
 import childProcess from 'node:child_process';
 import log from '../utils/logger.js';
@@ -8,11 +7,15 @@ const exec = promisify(childProcess.exec);
 
 export default class ConvertPdfToPdfA {
   constructor(reqFile, reqBody) {
-    this.author = reqBody.author;
     this.title = reqBody.title;
+    this.author = reqBody.author;
     this.keywords = reqBody.keywords;
     this.ocr = reqBody.ocr ? 300 : 0;
-    this.originalname = reqFile.originalname;
+    this.originalname = reqFile.originalname.replace('.pdf', '');
+    // handle special characters
+    this.originalname = Buffer.from(this.originalname, 'ascii').toString(
+      'utf8',
+    );
     this.filename = reqFile.filename;
     this.mimetype = reqFile.mimetype;
     this.size = reqFile.size;
@@ -32,49 +35,18 @@ export default class ConvertPdfToPdfA {
   }
 
   // TODO: Implement this method
-  // async validateFileTypeFromFileContent() {
-  //   const type = await fileTypeFromFile(this.path);
-  //   console.log(type);
-  //   if (type.mime !== 'application/pdf') {
-  //     this.mimetype = type.mime;
-  //     // throw new Error('Invalid file type (file content is not a pdf)');
-  //   }
-  // }
-
-  slugfyFilename() {
-    const slug = slugify(this.originalname.replace('.pdf', ''), {
-      lower: true,
-      strict: true,
-      locale: 'pt',
-    });
-    this.filename = slug;
+  async validateFileTypeFromFileContent() {
+    const type = await fileTypeFromFile(this.path);
+    log(type);
+    if (type.mime !== 'application/pdf') {
+      this.mimetype = type.mime;
+      throw new Error('Invalid file type (file content is not a pdf)');
+    }
   }
-
-  // log() {
-  //   console.log(this.author, this.title, this.subject);
-  //   console.log(
-  //     this.originalname,
-  //     this.filename,
-  //     this.mimetype,
-  //     this.size,
-  //     this.path,
-  //   );
-  // }
-
-  // async execute() {
-  //   try {
-  //     await exec(
-  //       `ocrmypdf ${this.path} processed/${this.filename}.pdfa.pdf --tesseract-timeout=0 --skip-text --skip-big=50 --pdfa-image-compression=lossless --title="${this.title}" --author="${this.author}" --subject="${this.subject}"`,
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //     throw error;
-  //   }
-  // }
 
   async ocrmypdf() {
     const { stdout, stderr } = await exec(
-      // tesseract-timeout=300 means 5 minutes
+      // tesseract-timeout=300 means 5 minutes, 0 disables OCR
       `ocrmypdf \
       ${this.ocr ? '--redo-ocr' : '--skip-text'} \
       --tesseract-timeout=${this.ocr} \
@@ -87,9 +59,20 @@ export default class ConvertPdfToPdfA {
       ${this.keywords ? `--keywords="${this.keywords}"` : ''} \
       ${this.keywords ? `--subject="${this.keywords}"` : ''} \
       ${this.path} \
-      public/pdfa/${this.filename}.pdfa.pdf`,
+      public/pdfa/${this.filename}.pdf`,
     );
-    log('stdout:', stdout);
-    log('stderr:', stderr);
+    log(stdout, stderr);
+  }
+
+  info() {
+    log('Body: ', this.title, this.author, this.keywords, this.ocr);
+    log(
+      'File: ',
+      this.originalname,
+      this.filename,
+      this.mimetype,
+      this.size,
+      this.path,
+    );
   }
 }

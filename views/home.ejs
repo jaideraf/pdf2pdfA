@@ -3,7 +3,7 @@
   <div class="container pt-4">
     <form
       method="post"
-      action="/upload"
+      action="/"
       enctype="multipart/form-data"
       class="form-group"
       id="form"
@@ -30,7 +30,7 @@
         />
       </div>
         <div class="input-group">
-          <label for="author" class="input-group-text">Autor</label>
+          <label for="author" class="input-group-text">Autor</i></label>
           <input
             type="text"
             placeholder="Nome completo"
@@ -52,7 +52,7 @@
           />
         </div>
         <div class="input-group">
-          <label for="file" class="input-group-text">Arquivo PDF</label>
+          <label for="file" class="input-group-text">Arquivo PDF <i class="fa-regular fa-file-pdf"></i></label>
           <input
             type="file"
             name="file"
@@ -76,20 +76,10 @@
             type="submit"
             value="Enviar"
             class="btn btn-primary"
-            title="Converter arquivo"
+            title="Enviar arquivo para conversão"
             id="submit">
-            Enviar
+            Enviar <i class="fa-solid fa-file-arrow-up"></i>
             </button>
-            <!-- <button
-            type="button"
-            value="Recarregar a página"
-            class="btn btn-secondary"
-            style="display: none"
-            title="Recarregar a página"
-            id="reload"
-            >
-            Recarregar a página
-            </button> -->
           </span>
         </div>
     </div>
