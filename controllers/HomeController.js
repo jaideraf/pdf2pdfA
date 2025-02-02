@@ -1,5 +1,8 @@
-import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
 import log from '../utils/logger.js';
+import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
+import deleteOldPDFs from '../utils/deleteOldPDFs.js';
+
+const fileSizeLimit = 33554432; // 32MB
 
 const HomeController = {
   index(req, res) {
@@ -9,19 +12,20 @@ const HomeController = {
     const genPdfA = new ConvertPdfToPdfA(req.file, req.body);
 
     try {
-      genPdfA.validateFileSize();
+      genPdfA.validateFileSize(fileSizeLimit);
       genPdfA.validateFileTypeFromFilename();
 
       genPdfA
         .validateFileTypeFromFileContent()
         .then(async () => {
           log('File type from content is valid');
-          genPdfA.info();
+          // genPdfA.info(); // debug
           try {
             await genPdfA.ocrmypdf();
+            await deleteOldPDFs();
             res.render('download', {
               pdfaFilePath: `pdfa/${genPdfA.filename}.pdf`,
-              pdfaFilename: `${genPdfA.originalname}.pdfa.pdf`,
+              pdfaFilename: `${genPdfA.originalname}-pdfa.pdf`,
             });
           } catch (error) {
             log(error);

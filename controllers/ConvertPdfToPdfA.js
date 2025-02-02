@@ -22,33 +22,34 @@ export default class ConvertPdfToPdfA {
     this.path = reqFile.path;
   }
 
-  validateFileSize() {
-    if (this.size > 33554432) {
-      throw new Error('File size is bigger than 32MB');
+  // check if file size is bigger than the limit
+  validateFileSize(size) {
+    if (this.size > size) {
+      throw new Error('File size is bigger than the limit');
     }
   }
 
+  // check if file name is a pdf
   validateFileTypeFromFilename() {
     if (this.mimetype !== 'application/pdf') {
       throw new Error('Invalid file type (file name is not a pdf)');
     }
   }
 
-  // TODO: Implement this method
+  // check if file content is a pdf
   async validateFileTypeFromFileContent() {
     const type = await fileTypeFromFile(this.path);
-    log(type);
     if (type.mime !== 'application/pdf') {
       this.mimetype = type.mime;
       throw new Error('Invalid file type (file content is not a pdf)');
     }
   }
 
+  // convert pdf to pdfa
   async ocrmypdf() {
     const { stdout, stderr } = await exec(
       // tesseract-timeout=300 means 5 minutes, 0 disables OCR
-      `ocrmypdf \
-      ${this.ocr ? '--redo-ocr' : '--skip-text'} \
+      `ocrmypdf ${this.ocr ? '--redo-ocr' : '--skip-text'} \
       --tesseract-timeout=${this.ocr} \
       --skip-big=50 \
       --pdfa-image-compression=lossless \
@@ -64,6 +65,7 @@ export default class ConvertPdfToPdfA {
     log(stdout, stderr);
   }
 
+  // show info about the request body and file
   info() {
     log('Body: ', this.title, this.author, this.keywords, this.ocr);
     log(

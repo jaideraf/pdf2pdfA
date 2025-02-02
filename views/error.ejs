@@ -1,22 +1,19 @@
-<%- include('partials/header.ejs', {title: "Ocorreu um erro ao gerar o arquivo PDF/A"}) %>
+<%- include('partials/header.ejs', {title: "Ocorreu um erro ao converter o arquivo"}) %>
   <div class="container pt-4">
     <p>
-      Verifique se o arquivo PDF submetido está correto.
+      Ao submeter um arquivo, atente-se às seguintes condições:
     </p>
     <p>
       <ul>
-        <li><i class="fa-solid fa-file-signature"></i> O arquivo não pode estar assinado: um arquivo assinado digitalmente não pode ser alterado</li>
-        <li><i class="fa-solid fa-circle-xmark"></i> O arquivo não pode ser maior que 32 megabytes: caso seu arquivo ultrapasse esse limite, converta-o para PDF/A em seu programa de origem (Microsoft Word, LibreOffice Writer, etc.)</li>
-        <li><i class="fa-solid fa-file-pdf"></i> Somente pode ser submetido um arquivo do tipo PDF</li>
+        <li><i class="fa-solid fa-file-signature"></i> O arquivo não pode conter assinaturas digitais, pois, uma vez assinado digitalmente, não deve ser alterado.</li>
+        <li><i class="fa-solid fa-circle-xmark"></i> O arquivo não pode ser maior que 32 megabytes. Caso seu arquivo ultrapasse esse limite, salve-o em PDF/A no editor de texto (Microsoft Word, LibreOffice Writer, etc.).</li>
+        <li><i class="fa-solid fa-file-pdf"></i> Somente pode ser submetido um arquivo do tipo PDF.</li>
       </ul>
     </p>
-    <p>Caso o erro persista, entre em contato com o <a href="mailto:jaider.ferreira@ufsc.br?subject=Conversor%20de%20PDF%20para%20PDF/A" title="Enviar e-mail">administrador do sistema</a>.</p>
-    <p>Você será direcionado para a página inicial automaticamente em 30 segundos (ou clicando <a href="/" title="Ir para a página inicial">aqui</a>).</p>
+
+
+
+    <div class="text-center"><a href="/" class="btn btn-secondary" title="Retorna à página inicial">Retornar à pagina inicial<i class="fas fa-home" aria-hidden="true"></i></a></div>
+
   </div>
-<script>
-  setTimeout(function () {
-     // after 30 seconds
-     window.location = "/";
-  }, 30000);
-</script>
 <%- include('partials/footer.ejs') %>

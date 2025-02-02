@@ -1,5 +1,5 @@
 const DownloadController = {
-  index(req, res) {
+  async index(req, res) {
     // res.set(
     //   'Content-Disposition',
     //   `attachment; filename="${genPdfA.filename}.pdfa.pdf"`,

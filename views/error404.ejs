@@ -1,0 +1,14 @@
+<%- include('partials/header.ejs', {title: "Erro 404: página não encontrada"}) %>
+  <div class="container pt-4">
+    <p>
+      A página requisitada não foi encontrada.
+    </p>
+    <p>Você será direcionado para a página inicial automaticamente em 30 segundos (ou clicando <a href="/" title="Ir para a página inicial">aqui</a>).</p>
+  </div>
+<script>
+  setTimeout(function () {
+     // after 30 seconds
+     window.location = "/";
+  }, 30000);
+</script>
+<%- include('partials/footer.ejs') %>

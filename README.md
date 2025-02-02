@@ -31,5 +31,6 @@ docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
 ## TO DO:
 
 - Optimize Docker image
-- Create a 404 error page
-- Change from EJS to Vue or React
+- Future: change from EJS to Vue or React
+- Link para o repositório (código fonte) no rodapé
+
