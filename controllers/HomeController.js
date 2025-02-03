@@ -9,23 +9,23 @@ const HomeController = {
     res.render('home', { title: 'Página inicial' });
   },
   async post(req, res) {
-    const genPdfA = new ConvertPdfToPdfA(req.file, req.body);
+    const converter = new ConvertPdfToPdfA(req.file, req.body);
 
     try {
-      genPdfA.validateFileSize(fileSizeLimit);
-      genPdfA.validateFileTypeFromFilename();
+      converter.validateFileSize(fileSizeLimit);
+      converter.validateFileTypeFromFilename();
 
-      genPdfA
+      converter
         .validateFileTypeFromFileContent()
         .then(async () => {
           log('File type from content is valid');
-          // genPdfA.info(); // debug
+          // converter.info(); // debug
           try {
-            await genPdfA.ocrmypdf();
+            await converter.ocrmypdf();
             await deleteOldPDFs();
             res.render('download', {
-              pdfaFilePath: `pdfa/${genPdfA.filename}.pdf`,
-              pdfaFilename: `${genPdfA.originalname}-pdfa.pdf`,
+              pdfaFilePath: `pdfa/${converter.filename}.pdf`,
+              pdfaFilename: `${converter.originalname}-pdfa.pdf`,
             });
           } catch (error) {
             log(error);
