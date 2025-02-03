@@ -7,20 +7,21 @@ RUN set -eux; \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # setup
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
+  dumb-init \
 	poppler-utils \
-	curl && \
+	curl \
 	# clean
-	apt clean && \
-	apt autoremove -y
+	&& rm -rf /var/lib/apt/lists/*
 
 # node LTS
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
-	apt purge nodejs -y && \
-	apt install -y nodejs && \
+	apt-get install -y nodejs && \
 	# clean
-	apt clean && \
-	apt autoremove -y
+	&& rm -rf /var/lib/apt/lists/*
+
+# install dumb-init
+RUN apt-get install -y dumb-init
 
 # override entrypoint
 ENTRYPOINT ["/usr/bin/env"]
@@ -35,9 +36,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY --chown=node:node package*.json ./
 
-#RUN npm ci --only=production && npm cache clean --force
-
-RUN npm install
+RUN npm ci --only=production && npm cache clean --force
 
 # Bundle app source
 COPY --chown=node:node . .
@@ -46,7 +45,5 @@ VOLUME [ "/usr/src/app" ]
 
 EXPOSE 8080
 
-#USER node
-#CMD ["dumb-init", "node", "index.js" ]
-
-CMD ["npm", "run", "dev"]
+USER node
+CMD ["dumb-init", "node", "index.js" ]

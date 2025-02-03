@@ -25,12 +25,13 @@ docker run --rm -p 8080:8080 pdf2pdfa:latest
 ## Developing
 
 ```
+docker build --pull --rm  --no-cache --progress=plain -f Dockerfile-dev -t pdf2pdfa:latest . 2>&1 | tee build.log
 docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
 ```
 
 ## TO DO:
 
 - Optimize Docker image
-- Future: change from EJS to Vue or React
-- Link para o repositório (código fonte) no rodapé
+- Change from EJS to Vue or React
+- Include a link to the source code in the footer
 
