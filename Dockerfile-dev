@@ -7,21 +7,19 @@ RUN set -eux; \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # setup
-RUN apt-get update && apt-get install -y \
-	curl \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	curl && \
 	# clean
-  && rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*
 
 # node LTS
-RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - \
-	&& apt-get install -y nodejs \
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
+	apt-get install -y --no-install-recommends nodejs && \
 	# clean
-  && rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*
 
 # override entrypoint
 ENTRYPOINT ["/usr/bin/env"]
-
-ENV NODE_ENV=production
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -31,9 +29,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY --chown=node:node package*.json ./
 
-#RUN npm ci --only=production && npm cache clean --force
-
-RUN npm install
+RUN npm install && npm cache clean --force
 
 # Bundle app source
 COPY --chown=node:node . .
@@ -41,7 +37,5 @@ COPY --chown=node:node . .
 VOLUME [ "/usr/src/app" ]
 
 EXPOSE 8080
-
-#USER node
 
 CMD ["npm", "run", "dev"]

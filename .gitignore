@@ -3,3 +3,4 @@ uploads/*
 !uploads/.gitkeep
 public/pdfa/*
 !public/pdfa/.gitkeep
+build.log

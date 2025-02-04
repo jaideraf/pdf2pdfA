@@ -6,27 +6,22 @@ ENV TZ=America/Sao_Paulo
 RUN set -eux; \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# add node user
+RUN groupadd --gid 1001 node \
+    && useradd --uid 1001 --gid node --shell /bin/bash --create-home node
+
 # setup
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   dumb-init \
-	poppler-utils \
-	curl \
+	curl && \
+	# node LTS
+	curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
+	apt-get install -y --no-install-recommends nodejs && \
 	# clean
-	&& rm -rf /var/lib/apt/lists/*
-
-# node LTS
-RUN curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
-	apt-get install -y nodejs && \
-	# clean
-	&& rm -rf /var/lib/apt/lists/*
-
-# install dumb-init
-RUN apt-get install -y dumb-init
+	rm -rf /var/lib/apt/lists/*
 
 # override entrypoint
-ENTRYPOINT ["/usr/bin/env"]
-
-ENV NODE_ENV=production
+ENTRYPOINT ["dumb-init", "/usr/bin/env"]
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -36,7 +31,9 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY --chown=node:node package*.json ./
 
-RUN npm ci --only=production && npm cache clean --force
+ENV NODE_ENV=production
+
+RUN npm ci --only=production
 
 # Bundle app source
 COPY --chown=node:node . .
@@ -46,4 +43,5 @@ VOLUME [ "/usr/src/app" ]
 EXPOSE 8080
 
 USER node
-CMD ["dumb-init", "node", "index.js" ]
+
+CMD ["dumb-init", "node", "app.js" ]

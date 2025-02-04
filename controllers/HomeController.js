@@ -18,7 +18,7 @@ const HomeController = {
       converter
         .validateFileTypeFromFileContent()
         .then(async () => {
-          log('File type from content is valid');
+          // log('File type from content is valid');
           // converter.info(); // debug
           try {
             await converter.ocrmypdf();

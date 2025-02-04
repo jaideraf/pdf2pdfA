@@ -4,8 +4,8 @@
   "description": "A simple tool to convert PDF files to PDF/A files",
   "main": "app.js",
   "scripts": {
-    "start": "export DEBUG='pdf2pdfA' && node app.js",
-    "dev": "export DEBUG='pdf2pdfA' && nodemon -e js,mjs,cjs,json,ejs app.js",
+    "start": "export DEBUG='pdf2pdfA' && node bin/www.js",
+    "dev": "export DEBUG='pdf2pdfA' && nodemon -e js,mjs,cjs,json,ejs bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -1,6 +1,5 @@
 import express from 'express';
 import favicon from 'serve-favicon';
-import log from './utils/logger.js';
 import routes from './routes/index.js';
 import AppController from './controllers/AppController.js';
 
@@ -13,6 +12,4 @@ app.use(routes);
 app.use(AppController.notFound);
 app.use(AppController.handleError);
 
-app.listen(8080, () => {
-  log('Server is running on http://localhost:8080');
-});
+export default app;
