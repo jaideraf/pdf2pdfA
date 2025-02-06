@@ -29,7 +29,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 
 ENV NODE_ENV=production
 
@@ -44,4 +44,4 @@ EXPOSE 8080
 
 USER node
 
-CMD ["dumb-init", "node", "app.js" ]
+CMD ["dumb-init", "node", "bin/www.js" ]
