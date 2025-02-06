@@ -4,8 +4,6 @@ A simple tool to convert PDF files to PDF/A files. It is intended to replace htt
 
 ## Getting the tool
 
-TO DO: Change later
-
 ```
 git clone https://github.com/jaideraf/pdf2pdfA.git && cd pdf2pdfA
 ```
