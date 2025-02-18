@@ -1,10 +1,6 @@
 import { jest } from '@jest/globals';
 import ConvertPdfToPdfA from '../controllers/ConvertPdfToPdfA.js';
 
-jest.mock('node:util');
-jest.mock('node:child_process');
-jest.mock('../utils/logger.js');
-
 describe('ConvertPdfToPdfA', () => {
   const reqFile = {
     originalname: 'test.pdf',
