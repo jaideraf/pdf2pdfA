@@ -29,6 +29,11 @@ docker build --pull --no-cache --progress plain -f Dockerfile-dev \
 docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
 ```
 
+### Tests
+```
+npm test
+```
+
 ### TO DO:
 - Change from EJS to Vue or React
 
