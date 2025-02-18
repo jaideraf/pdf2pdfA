@@ -1,13 +1,9 @@
-import { promisify } from 'node:util';
 import { jest } from '@jest/globals';
 import ConvertPdfToPdfA from '../controllers/ConvertPdfToPdfA.js';
-import log from '../utils/logger.js';
 
 jest.mock('node:util');
 jest.mock('node:child_process');
 jest.mock('../utils/logger.js');
-
-const exec = jest.fn();
 
 describe('ConvertPdfToPdfA', () => {
   const reqFile = {
@@ -44,12 +40,15 @@ describe('ConvertPdfToPdfA', () => {
   });
 
   test('validateFileSize throws error if file size is bigger than limit', () => {
-    expect(() => converter.validateFileSize(512)).toThrow('File size is bigger than the limit');
+    expect(() => converter.validateFileSize(512)).toThrow(
+      'File size is bigger than the limit',
+    );
   });
 
   test('validateFileTypeFromFilename throws error if file type is not pdf', () => {
     converter.mimetype = 'application/zip';
-    expect(() => converter.validateFileTypeFromFilename()).toThrow('Invalid file type (file name is not a pdf)');
+    expect(() => converter.validateFileTypeFromFilename()).toThrow(
+      'Invalid file type (file name is not a pdf)',
+    );
   });
-
 });
