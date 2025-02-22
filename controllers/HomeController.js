@@ -14,7 +14,6 @@ const HomeController = {
     try {
       converter.validateFileSize(fileSizeLimit);
       converter.validateFileTypeFromFilename();
-
       converter
         .validateFileTypeFromFileContent()
         .then(async () => {

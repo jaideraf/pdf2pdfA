@@ -23,8 +23,8 @@ export default class ConvertPdfToPdfA {
   }
 
   // check if file size is bigger than the limit
-  validateFileSize(size) {
-    if (this.size > size) {
+  validateFileSize(limit) {
+    if (this.size > limit) {
       throw new Error('File size is bigger than the limit');
     }
   }

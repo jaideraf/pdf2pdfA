@@ -1,4 +1,27 @@
 #!/usr/bin/env node
+/*
+  pdf2pdfA - A service tool to convert PDF files to PDF/A
+
+  The server is created with the Express framework, it uses the Multer
+  middleware to handle file uploads, and the ocrmypdf library to convert the
+  PDF files to PDF/A.
+
+  The following restrictions apply to the PDF files that can be converted to:
+  - The file must be a PDF file.
+  - The file must not be above 32 MB.
+  - The file must not have digital signatures.
+
+  The folowing code is the entry point of the application, it creates a cluster
+  of workers to take advantage of multi-core processors. The number of workers
+  is equal to the number of CPU cores available on the machine.
+
+  The primary process creates the workers and listens for the exit event to
+  start a new worker. The workers create an instance of the Express server and
+  listen on port 8080.
+
+  Author: jaideraf <jaideraf@gmail.com>
+  Date: 2025-02-22
+*/
 
 // from de book: Construindo aplicações com NodeJS, 5.4.1
 import cluster from 'cluster';
