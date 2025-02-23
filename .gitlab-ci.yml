@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
   only:
-    - master
+    - main
   script:
     - docker build . -t "$CI_REGISTRY_IMAGE:latest" --no-cache
     - docker login $CI_REGISTRY -u $CI_REGISTRY_USER  -p $CI_REGISTRY_PASSWORD
@@ -24,7 +24,7 @@ build:
 portainer:
   stage: portainer
   only:
-    - master
+    - main
   variables:
     GIT_CHECKOUT: "false"
   script:
