@@ -8,7 +8,7 @@ The main pourpose of this tool is to serve as the PDF/A  conversor for theses, d
 
 ### Getting the tool
 ```
-git clone https://github.com/jaideraf/pdf2pdfA.git && cd pdf2pdfA
+git clone https://codigos.ufsc.br/bu/pdf2pdfa.git && cd pdf2pdfa
 ```
 
 ### Building the image (production)
