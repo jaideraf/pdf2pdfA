@@ -23,7 +23,7 @@
   Date: 2025-02-22
 */
 
-// from de book: Construindo aplicações com NodeJS, 5.4.1
+// from the book: Construindo aplicações com NodeJS, 5.4.1
 import cluster from 'cluster';
 import os from 'os';
 import app from '../app.js';
