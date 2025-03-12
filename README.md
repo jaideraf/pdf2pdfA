@@ -4,7 +4,7 @@ A simple tool to convert PDF files to [PDF/A](https://en.wikipedia.org/wiki/PDF/
 
 > PDF/A is an ISO-standardized version of the Portable Document Format (PDF) specialized for use in the archiving and long-term preservation of electronic documents. -- <cite>Wikipedia, 2025</cite>
 
-The main purpose of this tool is to serve as the PDF/A converter for theses, dissertations and other university documents for long time preservation.
+The main purpose of this tool is to serve as the PDF/A converter for theses, dissertations and other university documents for long term preservation.
 
 ### Getting the tool
 ```
