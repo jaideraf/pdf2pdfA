@@ -4,7 +4,7 @@ A simple tool to convert PDF files to [PDF/A](https://en.wikipedia.org/wiki/PDF/
 
 > PDF/A is an ISO-standardized version of the Portable Document Format (PDF) specialized for use in the archiving and long-term preservation of electronic documents. -- <cite>Wikipedia, 2025</cite>
 
-The main pourpose of this tool is to serve as the PDF/A  conversor for theses, dissertations and other university documents for long time preservation.
+The main purpose of this tool is to serve as the PDF/A converter for theses, dissertations and other university documents for long time preservation.
 
 ### Getting the tool
 ```
@@ -23,7 +23,7 @@ docker run --rm -d -p 8080:8080 pdf2pdfa:latest
 
 ### Running (development)
 ```
-npm i
+npm install
 docker build --pull --no-cache --progress plain -f Dockerfile-dev \
 -t pdf2pdfa:latest . 2>&1 | tee build.log
 docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
