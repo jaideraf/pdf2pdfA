@@ -1,16 +1,13 @@
 <%- include('partials/header.ejs', {title: "Ocorreu um erro ao converter o arquivo"}) %>
   <div class="container pt-4">
-    <p>
-      Ao submeter um arquivo, atente-se às seguintes condições:
-    </p>
-    <p>
+    <p>Ao submeter um arquivo, atente-se às seguintes condições:</p>
+    <div>
       <ul>
         <li><i class="fa-solid fa-file-signature"></i> O arquivo não pode conter assinaturas digitais pois, uma vez assinado digitalmente, não deve ser alterado.</li>
         <li><i class="fa-solid fa-circle-xmark"></i> O arquivo não pode ser maior que 32 megabytes. Caso ultrapasse esse limite, salve-o em PDF/A no editor de texto original (Microsoft Word, LibreOffice Writer, etc.).</li>
         <li><i class="fa-solid fa-file-pdf"></i> Somente pode ser submetido um arquivo do tipo PDF.</li>
       </ul>
-    </p>
-
+    </div>
 
 
     <div class="text-center"><a href="/" class="btn btn-secondary" title="Retorna à página inicial">Retornar à pagina inicial<i class="fas fa-home" aria-hidden="true"></i></a></div>
