@@ -33,8 +33,3 @@ docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
 ```
 npm test
 ```
-
-### TO DO:
-- Change from EJS to Vue or React
-
-
