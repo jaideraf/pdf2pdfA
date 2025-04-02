@@ -7,7 +7,7 @@ A simple tool to convert PDF files to [PDF/A](https://en.wikipedia.org/wiki/PDF/
 The main purpose of this tool is to serve as the PDF/A converter for theses, dissertations and other university documents for long-term preservation.
 
 ### Getting the tool
-```
+```shell
 git clone https://codigos.ufsc.br/bu/pdf2pdfa.git && cd pdf2pdfa
 ```
 
