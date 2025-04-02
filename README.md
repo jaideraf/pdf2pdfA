@@ -7,22 +7,22 @@ A simple tool to convert PDF files to [PDF/A](https://en.wikipedia.org/wiki/PDF/
 The main purpose of this tool is to serve as the PDF/A converter for theses, dissertations and other university documents for long-term preservation.
 
 ### Getting the tool
-```
+```shell
 git clone https://codigos.ufsc.br/bu/pdf2pdfa.git && cd pdf2pdfa
 ```
 
 ### Building the image (production)
-```
+```shell
 docker build --pull -f Dockerfile -t pdf2pdfa:latest .
 ```
 
 ### Running (production)
-```
+```shell
 docker run --rm -d -p 8080:8080 pdf2pdfa:latest
 ```
 
 ### Building and running (development)
-```
+```shell
 npm install
 docker build --pull --no-cache --progress plain -f Dockerfile-dev \
 -t pdf2pdfa:latest . 2>&1 | tee build.log
@@ -30,6 +30,6 @@ docker run --rm -p 8080:8080 -v ./:/usr/src/app pdf2pdfa:latest
 ```
 
 ### Tests
-```
+```shell
 npm test
 ```
