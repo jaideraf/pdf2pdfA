@@ -10,7 +10,7 @@ const app = express();
 app.use(compression({ threshold: 0 }));
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(express.static('public'));
-app.use(favicon('public/img/cropped-favicon-32x32.png'));
+app.use(favicon('public/img/favicon.png'));
 app.set('view engine', 'ejs');
 app.use(routes);
 app.use(AppController.notFound);
