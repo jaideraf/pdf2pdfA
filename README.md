@@ -55,8 +55,8 @@ npm test
 
 ## Built upon
 
-- [OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) (Tesseract, etc. )
-- [Node.js](https://nodejs.org/) (Express, File-type, EJS, etc.)
+- [OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) (Tesseract, etc. ), v16.13.0
+- [Node.js](https://nodejs.org/) (Express, File-type, EJS, etc.), v24
 
 ## License
 

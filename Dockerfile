@@ -1,5 +1,5 @@
 # OS - Ubuntu Based
-FROM jbarlow83/ocrmypdf:v16.10.4
+FROM jbarlow83/ocrmypdf:v16.13.0
 
 # set timezone
 ENV TZ=America/Sao_Paulo
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   dumb-init \
   curl && \
   # node LTS
-  curl -sL https://deb.nodesource.com/setup_22.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_24.x | bash - && \
   apt-get install -y --no-install-recommends nodejs && \
   # clean
   rm -rf /var/lib/apt/lists/*
