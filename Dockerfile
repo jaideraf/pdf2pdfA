@@ -1,5 +1,5 @@
 # OS - Ubuntu Based
-FROM jbarlow83/ocrmypdf:v16.13.0
+FROM jbarlow83/ocrmypdf:v17.2.0
 
 # set timezone
 ENV TZ=America/Sao_Paulo

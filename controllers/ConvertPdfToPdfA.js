@@ -48,9 +48,10 @@ export default class ConvertPdfToPdfA {
   // convert pdf to pdfa
   async ocrmypdf() {
     const { stdout, stderr } = await exec(
-      // tesseract-timeout=300 means 5 minutes, 0 disables OCR
-      `ocrmypdf ${this.ocr ? '--redo-ocr' : '--skip-text'} \
-      --tesseract-timeout=${this.ocr} \
+      // tesseract-timeout=300 means 5 minutes, 0 disables OCR (v16.13.0),
+      // --ocr-engine=none disables OCR (v17.2.0)
+      `ocrmypdf --mode=${this.ocr ? 'redo' : 'skip'} \
+      ${this.ocr ? `--tesseract-timeout=${this.ocr}` : '--ocr-engine=none'} \
       --skip-big=50 \
       --pdfa-image-compression=lossless \
       --language=por+eng+spa \
