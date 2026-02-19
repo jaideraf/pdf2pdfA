@@ -52,6 +52,7 @@ export default class ConvertPdfToPdfA {
       // --ocr-engine=none disables OCR (v17.2.0)
       `ocrmypdf --mode=${this.ocr ? 'redo' : 'skip'} \
       ${this.ocr ? `--tesseract-timeout=${this.ocr}` : '--ocr-engine=none'} \
+      --output-type=pdfa \
       --skip-big=50 \
       --pdfa-image-compression=lossless \
       --language=por+eng+spa \
