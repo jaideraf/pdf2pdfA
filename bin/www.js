@@ -24,8 +24,8 @@
 */
 
 // from the book: Construindo aplicações com NodeJS, 5.4.1
-import cluster from 'cluster';
-import os from 'os';
+import cluster from 'node:cluster';
+import os from 'node:os';
 import app from '../app.js';
 import log from '../utils/logger.js';
 

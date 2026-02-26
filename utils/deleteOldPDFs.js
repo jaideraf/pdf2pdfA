@@ -21,8 +21,8 @@ the file was kept.
 /*
 
 /* eslint-disable no-await-in-loop */
-import { readdir, stat, unlink } from 'fs/promises';
-import { join } from 'path';
+import { readdir, stat, unlink } from 'node:fs/promises';
+import { join } from 'node:path';
 import log from './logger.js';
 
 const folderPaths = ['./uploads', './public/pdfa'];
@@ -39,9 +39,7 @@ async function deleteOldPDFsFromFolder(folderPath) {
 
       if (creationDate !== today) {
         await unlink(filePath);
-        log(
-          `🗑️ Deleted: ${file} (created on ${creationDate}) in ${folderPath}`,
-        );
+        log(`🗑️ Deleted: ${file} (created on ${creationDate}) in ${folderPath}`);
       } else {
         log(`✅ Kept: ${file} (created today) in ${folderPath}`);
       }

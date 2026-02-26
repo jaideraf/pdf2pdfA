@@ -1,6 +1,6 @@
-import { fileTypeFromFile } from 'file-type';
-import { promisify } from 'node:util';
 import childProcess from 'node:child_process';
+import { promisify } from 'node:util';
+import { fileTypeFromFile } from 'file-type';
 import log from '../utils/logger.js';
 
 const exec = promisify(childProcess.exec);

@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import homeRoutes from './home.js';
+import checkRoutes from './check.js';
 import downloadRoutes from './download.js';
 import errorRoutes from './error.js';
-import checkRoutes from './check.js';
+import homeRoutes from './home.js';
 
 const routes = new Router();
 

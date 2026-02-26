@@ -1,9 +1,10 @@
-import express from 'express';
 import compression from 'compression';
+import express from 'express';
 import helmet from 'helmet';
 import favicon from 'serve-favicon';
-import routes from './routes/index.js';
+
 import AppController from './controllers/AppController.js';
+import routes from './routes/index.js';
 
 const app = express();
 

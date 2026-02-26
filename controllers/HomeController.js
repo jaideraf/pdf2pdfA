@@ -1,6 +1,6 @@
+import deleteOldPDFs from '../utils/deleteOldPDFs.js';
 import log from '../utils/logger.js';
 import ConvertPdfToPdfA from './ConvertPdfToPdfA.js';
-import deleteOldPDFs from '../utils/deleteOldPDFs.js';
 
 const fileSizeLimit = 33554432; // 32MB
 
