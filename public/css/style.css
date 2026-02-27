@@ -3,5 +3,10 @@
 }
 
 i {
-  padding-left: 0.5em
+  padding-left: 0.5em;
+}
+
+.material-symbols-outlined {
+  vertical-align: sub;
+  font-size: 20px;
 }
