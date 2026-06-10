@@ -76,11 +76,8 @@ GitLab CI (`.gitlab-ci.yml`):
 
 ## Command Workflow
 
-1. **Before commit**: Automated via pre-commit hooks (husky + lint-staged):
-   - Runs `npx biome format --write` and `npx biome check` on staged files.
-   - Runs tests on staged test files.
-   - Hooks are installed automatically on `npm install` (via `prepare` script).
-2. **Manual checks**: `npx biome format .` and `npx biome check .` (full codebase).
+1. **Before commit**: `npx biome format .` then `npx biome check .`
+2. **Before push**: `npm test` (requires deps installed; may need direct jest call).
 3. **Build/deploy**: `docker build` (main branch triggers GitLab CI).
 
 ## Type Checking
@@ -95,3 +92,4 @@ Debug output controlled by `DEBUG=pdf2pdfA` environment variable (set in `npm st
 
 - Jest test script path may fail; use direct node + jest.js call.
 - OCRmyPDF subprocess depends on Docker container setup; won't work outside Docker.
+- No pre-commit hooks configured.
