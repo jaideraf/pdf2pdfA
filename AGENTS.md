@@ -90,6 +90,4 @@ Debug output controlled by `DEBUG=pdf2pdfA` environment variable (set in `npm st
 
 ## Known Quirks
 
-- Jest test script path may fail; use direct node + jest.js call.
 - OCRmyPDF subprocess depends on Docker container setup; won't work outside Docker.
-- No pre-commit hooks configured.
