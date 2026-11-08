@@ -1,10 +1,12 @@
 # OS - Ubuntu Based
-FROM jbarlow83/ocrmypdf:v17.2.0
+FROM jbarlow83/ocrmypdf:v17.13.0
+
+USER root
 
 # set timezone
 ENV TZ=America/Sao_Paulo
 RUN set -eux; \
-  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  echo $TZ > /etc/timezone
 
 # add node user
 RUN groupadd --gid 1001 node \
@@ -13,9 +15,10 @@ RUN groupadd --gid 1001 node \
 # setup
 RUN apt-get update && apt-get install -y --no-install-recommends \
   dumb-init \
+  ca-certificates \
   curl && \
   # node LTS
-  curl -sL https://deb.nodesource.com/setup_24.x | bash - && \
+  curl -fsSL https://deb.nodesource.com/setup_26.x | bash - && \
   apt-get install -y --no-install-recommends nodejs && \
   # clean
   rm -rf /var/lib/apt/lists/*
